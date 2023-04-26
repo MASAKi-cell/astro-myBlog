@@ -1,3 +1,3 @@
-# nuxt × Vue × TypeScript × Vuex Todoアプリ
+# Astro × microCMS × Vercel
 
-Nuxt.js用のTodoアプリ
+Astroで自作ブログを作成する
