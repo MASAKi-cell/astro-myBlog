@@ -1,12 +1,15 @@
 import { microcmsClient } from "../api/microcms";
 import type { MicroCMSQueries } from "microcms-js-sdk";
 
-export const getAllBlogs = async (queries: MicroCMSQueries) => {
-  await microcmsClient
+export const getAllBlogs = async (queries: MicroCMSQueries): Promise<any> => {
+  return await microcmsClient
     .get({
       endpoint: "myblog",
-      queries: { limit: 20 },
+      queries,
     })
-    .then((res) => console.log(res))
+    .then((res) => {
+      console.log(res);
+      return res;
+    })
     .catch((err) => console.error(err));
 };

@@ -14,15 +14,15 @@ const res = await getAllBlogs({ fields: ["id", "title"] });
       <strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
     </p>
     <ul>
-      <li>
-        <a href="">初回投稿です</a>
-      </li>
-      <li>
-        <a href="">Astroとは</a>
-      </li>
-      <li>
-        <a href="">AstorとmicroCMSで行う自作ブログ</a>
-      </li>
+      {
+        res.contents.map((content: any) => {
+          return (
+            <li>
+              <a href={content.id}>{content.title}</a>
+            </li>
+          );
+        })
+      }
     </ul>
   </main>
 </Layout>
