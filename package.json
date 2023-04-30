@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "astro": "^2.3.0",
+    "dayjs": "^1.11.7",
     "microcms-js-sdk": "^2.3.3"
   }
 }

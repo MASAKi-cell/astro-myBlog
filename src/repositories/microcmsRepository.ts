@@ -11,7 +11,7 @@ export const getAllBlogs = async (
 ): Promise<BlogsData> => {
   return await microcmsClient
     .get({
-      endpoint: "myblog",
+      endpoint: import.meta.env.ENDPOINT,
       queries,
     })
     .then((res) => {
@@ -28,7 +28,7 @@ export const getBlogsDetail = async (
 ): Promise<BlogsDetail> => {
   return await microcmsClient
     .getListDetail({
-      endpoint: "myblog",
+      endpoint: import.meta.env.ENDPOINT,
       contentId,
       queries,
     })
