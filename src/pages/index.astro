@@ -8,16 +8,11 @@ const res = await getAllBlogs({ fields: ["id", "title"] });
 <Layout title="My Origin Blog">
   <main>
     <h1>Welcome to <span class="text-gradient">Blog</span></h1>
-    <p class="instructions">
-      To get started, open the directory <code>src/pages</code> in your project.<br
-      />
-      <strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
-    </p>
     <ul>
       {
         res.contents.map((content: any) => {
           return (
-            <li>
+            <li class="instructions">
               <a href={content.id}>{content.title}</a>
             </li>
           );

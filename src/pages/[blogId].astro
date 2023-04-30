@@ -1,0 +1,26 @@
+---
+/** types */
+import type { BlogsDetail } from "../api/types/microcmsTypes";
+
+/** api */
+import { getBlogsDetail } from "../repositories/microcmsRepository";
+
+export function getStaticPaths() {
+  return [{ params: { blogId: "5dbgueei73" } }];
+}
+
+const { blogId } = Astro.params;
+let blogData: BlogsDetail | null = null;
+
+if (blogId) {
+  blogData = await getBlogsDetail(blogId);
+}
+---
+
+<layout title="blog">
+  <main>
+    <h1>{blogData ? blogData.title : ""}</h1>
+    <p>投稿日：{blogData ? blogData.revisedAt : ""}</p>
+    <div>{blogData ? blogData.content : ""}</div>
+  </main>
+</layout>
