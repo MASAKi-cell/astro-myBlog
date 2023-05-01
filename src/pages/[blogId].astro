@@ -1,4 +1,6 @@
 ---
+import Layout from "../layouts/Layout.astro";
+
 /** types */
 import type { BlogsDetail } from "../api/types/microcmsTypes";
 
@@ -20,14 +22,14 @@ if (blogId) {
 }
 ---
 
-<layout title="blog">
+<Layout title="blog">
   <main>
     <h1>{blogData ? blogData.title : ""}</h1>
     <p>
       投稿日：{
-        blogData ? new formatDate(blogData.revisedAt).toJpDateWithWeek() : ""
+        blogData ? new formatDate(blogData!.revisedAt).toJpDateWithWeek() : ""
       }
     </p>
     <div>{blogData ? blogData.content : ""}</div>
   </main>
-</layout>
+</Layout>
