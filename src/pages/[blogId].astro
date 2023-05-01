@@ -5,13 +5,23 @@ import Layout from "../layouts/Layout.astro";
 import type { BlogsDetail } from "../api/types/microcmsTypes";
 
 /** api */
-import { getBlogsDetail } from "../repositories/microcmsRepository";
+import {
+  getAllBlogs,
+  getBlogsDetail,
+} from "../repositories/microcmsRepository";
 
 /** utils */
 import { formatDate } from "../utils/formatDate";
 
-export function getStaticPaths() {
-  return [{ params: { blogId: "5dbgueei73" } }];
+export async function getStaticPaths() {
+  const res = await getAllBlogs({ fields: ["id"] });
+  return res.contents.map((content) => {
+    return {
+      params: {
+        blogId: content.id,
+      },
+    };
+  });
 }
 
 const { blogId } = Astro.params;
@@ -27,9 +37,9 @@ if (blogId) {
     <h1>{blogData ? blogData.title : ""}</h1>
     <p>
       投稿日：{
-        blogData ? new formatDate(blogData!.revisedAt).toJpDateWithWeek() : ""
+        blogData ? new formatDate(blogData.revisedAt).toJpDateWithWeek() : ""
       }
     </p>
-    <div>{blogData ? blogData.content : ""}</div>
+    <div set:html={blogData ? blogData.content : ""} />
   </main>
 </Layout>

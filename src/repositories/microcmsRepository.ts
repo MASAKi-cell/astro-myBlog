@@ -1,6 +1,6 @@
 /** types */
 import type { MicroCMSQueries } from "microcms-js-sdk";
-import type { BlogsDetail, BlogsData } from "../api/types/microcmsTypes";
+import type { BlogsDetail, BlogsData } from "../types/microcmsTypes";
 
 /** api */
 import { microcmsClient } from "../api/microcms";
