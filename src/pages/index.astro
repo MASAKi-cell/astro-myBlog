@@ -7,7 +7,6 @@ const res = await getAllBlogs({ fields: ["id", "title"] });
 
 <Layout title="My Origin Blog">
   <main>
-    <h1>Welcome to <span class="text-gradient">Blog</span></h1>
     <ul>
       {
         res.contents.map((content: any) => {
@@ -28,18 +27,6 @@ const res = await getAllBlogs({ fields: ["id", "title"] });
     padding: 1.5rem;
     max-width: 60ch;
   }
-  h1 {
-    font-size: 3rem;
-    font-weight: 800;
-    margin: 0;
-  }
-  .text-gradient {
-    background-image: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 400%;
-    background-position: 0%;
-  }
   .instructions {
     line-height: 1.6;
     margin: 1rem 0;
@@ -58,11 +45,5 @@ const res = await getAllBlogs({ fields: ["id", "title"] });
   }
   .instructions strong {
     color: rgb(var(--accent));
-  }
-  .link-card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-    gap: 1rem;
-    padding: 0;
   }
 </style>
