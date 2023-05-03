@@ -1,8 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { getAllBlogs } from "../repositories/microcmsRepository";
+import Card from "../components/Card.astro";
 
-const res = await getAllBlogs({ fields: ["id", "title"] });
+const res = await getAllBlogs({ fields: ["id", "title", "createdAt", "url"] });
 ---
 
 <Layout title="My Origin Blog">
@@ -12,7 +13,11 @@ const res = await getAllBlogs({ fields: ["id", "title"] });
         res.contents.map((content: any) => {
           return (
             <li class="instructions">
-              <a href={content.id}>{content.title}</a>
+              <Card
+                href={content.id}
+                title={content.title}
+                url={content.url.url}
+              />
             </li>
           );
         })

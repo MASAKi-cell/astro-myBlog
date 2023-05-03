@@ -9,7 +9,18 @@ export type BlogsDetail = {
 };
 
 export type BlogsData = {
-  contents: [{ id: string; title: string }];
+  contents: [
+    {
+      id: string;
+      title: string;
+      createdAt: string;
+      url: {
+        url: string;
+        height: number;
+        width: number;
+      };
+    }
+  ];
   totalCount: number;
   offset: number;
   limit: number;
