@@ -1,26 +1,33 @@
 ---
+/** types */
+import type { BlogUrl } from "../types/microcmsTypes";
+
+/** utils */
+import { formatDate } from "../utils/formatDate";
+
 export interface cardProps {
   title: string;
-  url: string;
   href: string;
+  url: BlogUrl;
+  createdAt: string;
 }
 
-const { href, title, url } = Astro.props;
+const { href, title, url, createdAt } = Astro.props;
 ---
 
-<li class="link-card">
-  <a href={href}>
-    <h2>
-      {title}
-    </h2>
-    <p>
-      <img src={url} />
-    </p>
+<article class="post-list">
+  <a class="link" href={href}>
+    <img class="img" src={url} />
+    <h2 class="title">{title}</h2>
+    <span class="update-date"
+      >{new formatDate(createdAt).toJpDateWithWeek()}</span
+    >
   </a>
-</li>
+</article>
+
 <style>
-  .link-card {
-    list-style: none;
+  .post-list {
+    margin: 0 5px 20px;
     display: flex;
     padding: 0.25rem;
     background-color: white;
@@ -28,12 +35,13 @@ const { href, title, url } = Astro.props;
     background-size: 400%;
     border-radius: 0.6rem;
     background-position: 100%;
+    width: 40%;
     transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
       0 2px 4px -2px rgba(0, 0, 0, 0.1);
   }
 
-  .link-card > a {
+  .post-list .link {
     width: 100%;
     text-decoration: none;
     line-height: 1.4;
@@ -43,21 +51,27 @@ const { href, title, url } = Astro.props;
     background-color: white;
     opacity: 0.8;
   }
-  h2 {
-    margin: 0;
-    font-size: 1.25rem;
-    transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  p {
-    margin-top: 0.5rem;
-    margin-bottom: 0;
-    color: #444;
-  }
-  .link-card:is(:hover, :focus-within) {
+
+  .post-list:is(:hover, :focus-within) {
     background-position: 0;
     background-image: var(--accent-gradient);
   }
-  .link-card:is(:hover, :focus-within) h2 {
+  .post-list:is(:hover, :focus-within) h2 {
     color: rgb(var(--accent));
+  }
+
+  .post-list .link .title {
+    margin: 0;
+    font-weight: 400;
+    transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .post-list .link .img {
+    width: 100%;
+    height: auto;
+  }
+
+  .post-list .link .update-date {
+    display: inline-block;
+    padding: 10px 0;
   }
 </style>

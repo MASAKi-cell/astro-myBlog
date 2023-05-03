@@ -14,14 +14,16 @@ export type BlogsData = {
       id: string;
       title: string;
       createdAt: string;
-      url: {
-        url: string;
-        height: number;
-        width: number;
-      };
+      url: BlogUrl;
     }
   ];
   totalCount: number;
   offset: number;
   limit: number;
+};
+
+export type BlogUrl = {
+  url: string;
+  height: number;
+  width: number;
 };

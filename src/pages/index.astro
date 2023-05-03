@@ -7,48 +7,165 @@ const res = await getAllBlogs({ fields: ["id", "title", "createdAt", "url"] });
 ---
 
 <Layout title="My Origin Blog">
-  <main>
-    <ul>
+  <!-- header -->
+  <header class="header">
+    <div class="header-parent">
+      <div class="text-title">
+        <h1 class="text-gradient">My Blog</h1>
+      </div>
+      <div class="row">
+        <nav class="header__nav">
+          <ul>
+            <li class="current">
+              <a class="smoothscroll" href="">Home</a>
+            </li>
+            <li><a class="smoothscroll" href="">Profile</a></li>
+            <li><a class="smoothscroll" href="">About me</a></li>
+            <li><a class="smoothscroll" href="">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <main class="main">
+    <div class="content">
       {
         res.contents.map((content: any) => {
           return (
-            <li class="instructions">
-              <Card
-                href={content.id}
-                title={content.title}
-                url={content.url.url}
-              />
-            </li>
+            <Card
+              href={content.id}
+              title={content.title}
+              url={content.url.url}
+              createdAt={content.createdAt}
+            />
           );
         })
       }
-    </ul>
+    </div>
   </main>
 </Layout>
 
 <style>
-  main {
-    margin: auto;
+  .main {
+    margin: 120px auto auto;
     padding: 1.5rem;
-    max-width: 60ch;
+    max-width: 75ch;
   }
-  .instructions {
-    line-height: 1.6;
-    margin: 1rem 0;
-    border: 1px solid rgba(var(--accent), 25%);
-    background-color: white;
-    padding: 1rem;
-    border-radius: 0.4rem;
+  .main .content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
   }
-  .instructions code {
-    font-size: 0.875em;
-    font-weight: bold;
-    background: rgba(var(--accent), 12%);
-    color: rgb(var(--accent));
-    border-radius: 4px;
-    padding: 0.3em 0.45em;
+
+  /* ===================================================================
+ * # site header
+ * ------------------------------------------------------------------- */
+  .header {
+    --header-height: 7.2rem;
+    z-index: 100;
+    width: 100%;
+    background-color: black;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
-  .instructions strong {
-    color: rgb(var(--accent));
+
+  .header .header-parent {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+
+  .header .header-parent .text-title {
+    padding: 0 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .header .row {
+    min-height: var(--header-height);
+    -ms-flex-pack: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding: 0 calc(var(--gutter-lg) + 1.2rem);
+    position: relative;
+  }
+
+  .header.offset {
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+  }
+
+  .header.scrolling {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  .header.sticky {
+    opacity: 0;
+    visibility: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  .header.sticky.scrolling {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .header--blog .row {
+    -ms-flex-pack: start;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+  }
+
+  /* -------------------------------------------------------------------
+ * ## header nav
+ * ------------------------------------------------------------------- */
+  .header__nav {
+    font-family: var(--font-2);
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+  }
+
+  .header__nav ul {
+    display: block;
+    text-align: left;
+    padding: 0;
+    margin: 0;
+  }
+
+  .header__nav li {
+    list-style: none;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    position: relative;
+  }
+
+  .header__nav a {
+    display: block;
+    height: var(--header-height);
+    line-height: var(--header-height);
+    padding: 0 40px;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .header__nav a:hover,
+  .header__nav a:focus {
+    color: white;
+  }
+
+  .header__nav .current a {
+    background-color: var(--color-1);
+    color: white;
   }
 </style>
