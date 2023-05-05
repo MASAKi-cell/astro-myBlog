@@ -1,7 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { getAllBlogs } from "../repositories/microcmsRepository";
 import Card from "../components/Card.astro";
+
+/** api */
+import { getAllBlogs } from "../repositories/microcmsRepository";
 
 const res = await getAllBlogs({ fields: ["id", "title", "createdAt", "url"] });
 ---
@@ -59,9 +61,6 @@ const res = await getAllBlogs({ fields: ["id", "title", "createdAt", "url"] });
     flex-wrap: wrap;
   }
 
-  /* ===================================================================
- * # site header
- * ------------------------------------------------------------------- */
   .header {
     --header-height: 7.2rem;
     z-index: 100;
@@ -125,9 +124,6 @@ const res = await getAllBlogs({ fields: ["id", "title", "createdAt", "url"] });
     justify-content: flex-start;
   }
 
-  /* -------------------------------------------------------------------
- * ## header nav
- * ------------------------------------------------------------------- */
   .header__nav {
     font-family: var(--font-2);
     font-size: 1.4rem;
